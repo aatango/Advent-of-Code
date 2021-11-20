@@ -25,34 +25,34 @@ class Passport:
 		return None
 
 	def validate_birth_year(self) -> bool:
-		if self.byr != None:
+		if self.byr is not None:
 			return 1920 <= int(self.byr) <= 2002
 		return False
 
 	def validate_issue_year(self) -> bool:
-		if self.iyr != None:
+		if self.iyr is not None:
 			return 2010 <= int(self.iyr) <= 2020
 		return False
 
 	def validate_expiration_year(self) -> bool:
-		if self.eyr != None:
+		if self.eyr is not None:
 			return 2020 <= int(self.eyr) <= 2030
 		return False
 
 	def validate_height(self) -> bool:
-		if self.hgt != None:
+		if self.hgt is not None:
 			unit = self.hgt[-2:]
-			
+		
 			if unit == "cm":
 				return 150 <= int(self.hgt[:-2]) <= 193
-			elif unit == "in":
+			if unit == "in":
 				return 59 <= int(self.hgt[:-2]) <= 76
 		return False
 
 	def validate_hair_color(self) -> bool:
 		"""I know Regex exist, want to try without."""
 
-		if self.hcl != None:
+		if self.hcl is not None:
 			if self.hcl[0] == "#":
 				color = self.hcl[1:]
 
@@ -65,13 +65,13 @@ class Passport:
 
 	def validate_eye_color(self) -> bool:
 		colors = ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]
-		if self.ecl != None:
+		if self.ecl is not None:
 			if self.ecl in colors:
 				return True
 		return False
 
 	def validate_passport_id(self) -> bool:
-		if self.pid != None:
+		if self.pid is not None:
 			return len(self.pid) == 9
 		return False
 
@@ -81,7 +81,7 @@ class Passport:
 		Since this field is to be ignored for the challenge, I won't bother.
 		"""
 
-		return self.cid != None
+		return self.cid is not None
 
 	def validate(self) -> bool:
 		valid = \
@@ -99,7 +99,7 @@ class Passport:
 
 def main() -> None:
 	valid_passports = 0
-	
+
 	for i in input_file:
 		passport = Passport(i)
 		if passport.validate():
@@ -113,4 +113,3 @@ if __name__ == "__main__":
 		input_file = file.read().split("\n\n")[:-1]
 
 	main()
-
