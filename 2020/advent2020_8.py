@@ -1,55 +1,58 @@
 """Advent of Code 2020, day 8"""
 
-class Console:
-	"""
-	"""
+class Handheld:
+	"""Handheld gaming console."""
 
 	def __init__(self):
 		self.accumulator = 0
-		self.queued_instruction= 0
-		self.instruction_set = set()
+		self.queued_address = 0
+		self.executed_addresses = set()
 
 	def __check(self) -> bool:
-		""" Checks if instruction was already run"""
+		"""Checks if instruction was already run."""
 
-		if self.queued_instruction not in self.instruction_set:
-			self.instruction_set.add(self.queued_instruction)
+		if self.queued_address not in self.executed_addresses and self.queued_address >= 0:
+			self.executed_addresses.add(self.queued_address)
+
 			return True
+
 		return False
 
-	def acc(self, value: int) -> bool:
-		""" Adds value to accumulator."""
+	def boot(self, boot_sequence: list[str]) -> bool:
+		"""Attempts to boot the handheld.
 
-		self.accumulator += value
-		self.queued_instruction += 1
-		return self.__check()
+		Detects infinite loop, and breaks boot sequence.
+		"""
 
-	def jmp (self, value: int) -> bool:
-		""" Jumps to assinged instruction."""
+		boot_status = True
 
-		self.queued_instruction += value
-		return self.__check()
+		while boot_status:
+			if self.queued_address >= len(boot_sequence):
+				return True
 
-	def nop (self, value) -> int:
-		"""No OPeration."""
+			operation, argument = boot_sequence[self.queued_address].split()
 
-		self.queued_instruction += 1
-		return self.__check()
+			if operation == "acc":
+				self.accumulator += int(argument)
+				self.queued_address += 1
 
+			elif operation == "jmp":
+				self.queued_address += int(argument)
 
+			elif operation == "nop":
+				self.queued_address += 1
+
+			boot_status = self.__check()
+
+		return False
 
 
 def main() -> int:
-	"""
-	"""
+	"""Attempt to boot handheld without changing the boot sequence."""
 
-	not_nintendo = Console()
-	boot_console = True
+	not_nintendo = Handheld()
 
-	while boot_console:
-		operation, argument = INPUT_FILE[not_nintendo.queued_instruction].split(" ")
-		boot_console = getattr(not_nintendo, operation)(int(argument))
-
+	not_nintendo.boot(INPUT_FILE)
 	return not_nintendo.accumulator
 
 
