@@ -56,15 +56,25 @@ def main() -> int:
 	return not_nintendo.accumulator
 
 
-def extra():
-	"""
-	"""
+def extra() -> int:
+	"""Fixes original boot error, and returns accumulator value at end of sequence."""
 
-	raise NotImplementedError
+	for i, instruction in enumerate(INPUT_FILE):
+		not_nintendo = Handheld()
+		instruction_list = INPUT_FILE[:]
+		if "nop" in instruction:
+			instruction_list[i] = "jmp" + instruction[3:]
+		elif "jmp" in instruction:
+			instruction_list[i] = "nop" + instruction[3:]
+		if not_nintendo.boot(instruction_list):
+			return not_nintendo.accumulator
+
+	return 0
 
 
 if __name__ == "__main__":
 	with open("../../input", "r") as file:
 		INPUT_FILE = file.read().splitlines()
 
-	print(main())
+#	print(main())
+	print(extra())
