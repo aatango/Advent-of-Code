@@ -2,9 +2,7 @@
 https://adventofcode.com/
 
 ## 2021
-Aiming to do these on time, using Python. Whatever is left after Christmas, will still be done, but they'll be clearly marked.
+Aimed to do these on time, using Python. Totalled 16/50 on time. Will be doing the rest without time constraint.
 
 ## 2020
-Started here. I will be doing these in Python, without a time constraint.
-
-
+Started here; did a few in Python, as warmup for 2021's event. Might do these in the future, with a different language.
