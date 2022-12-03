@@ -1,6 +1,10 @@
 # Advent-of-Code
 https://adventofcode.com/
 
+
+## 2022
+C++
+
 ## 2021
 Aimed to do these on time, using Python. Totalled 16/50 on time. Will be doing the rest without time constraint.
 
