@@ -5,8 +5,8 @@
 #include <vector>
 
 
-unsigned solveDay1(unsigned top_elves) {
-	std::ifstream i{"./1.input"};
+unsigned solveDay1(char const *p, unsigned top_elves) {
+	std::ifstream i{p};
 	unsigned calories_carried{0};
 	std::vector<unsigned> calories_per_elf{0};
 
@@ -33,7 +33,7 @@ unsigned solveDay1(unsigned top_elves) {
 }
 
 // Calorie Counting
-int main() {
-	std::cout << "Pt1: " << solveDay1(1) << std::endl;
-	std::cout << "Pt2: " << solveDay1(3) << std::endl;
+int main(int, char **argv) {
+	std::cout << "Pt1: " << solveDay1(argv[1], 1) << std::endl;
+	std::cout << "Pt2: " << solveDay1(argv[1], 3) << std::endl;
 }
