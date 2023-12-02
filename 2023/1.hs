@@ -14,8 +14,19 @@ solve_1 ss = sum $ map decode_calibration ss
 
 
 -- Part Two
-solve_2 :: [String] -> [String]
-solve_2 ss = ss
+
+-- Pre-process the input file beforehand, and then use it to solve part one.
+
+{- Input File Pre-Processing
+ - Replace the spelled number, with it's symbol;
+ - beware, the spelling of two numbers might overlap (i.e., "eightwo" == 82)!
+ - It is therefore not enough to simply search and replace a number at a time;
+ - better search and replace with {SPELLING}{NUMBER}{SPELLING}:
+ - for example, "eigh" == "eight8eight";
+ - this allows any shared characters to still be present,
+ - when replacing the next spelled number.
+-}
+
 
 main :: IO()
 main = do
@@ -23,4 +34,3 @@ main = do
  let notes :: [String] = lines input
 
  putStrLn . show $ solve_1 notes
--- putStrLn . show $ solve_1 $ solve_2 notes
