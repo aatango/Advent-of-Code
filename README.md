@@ -1,6 +1,11 @@
 # Advent-of-Code
 https://adventofcode.com/
 
+## 2023
+
+Haskell
+
+Pipe the input to the compiled target, for example: `cat 1.input | ./1`.
 
 ## 2022
 C++
